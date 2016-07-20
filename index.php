@@ -18,6 +18,7 @@
 		}
 		exec($command);
 		setcookie("pGo", $port,  time()+600);
+		$_COOKIE['pGo'] = $port;
 		$port++;
 		file_put_contents('port.conf', $port);
 	}
