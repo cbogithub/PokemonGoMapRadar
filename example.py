@@ -42,6 +42,7 @@ with open('credentials.json') as file:
 	credentials = json.load(file)
 
 coords = json.load(open('coords.json'))
+args = False;
 
 PTC_CLIENT_SECRET = credentials.get('ptc_client_secret', None)
 ANDROID_ID = credentials.get('android_id', None)
@@ -175,9 +176,15 @@ def set_location(location_name):
     global origin_lat
     global origin_lon
     global coords
+    global args
+
     updateLocation()
 
-    location_name = coords["location"]
+    location_name = '';
+    try:
+        location_name = coords[args.port]
+    except NameError:
+        location_name = 'Durango, Dgo.'
 
     if prog.match(location_name):
         local_lat, local_lng = [float(x) for x in location_name.split(",")]
