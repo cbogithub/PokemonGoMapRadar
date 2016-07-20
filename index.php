@@ -1,4 +1,12 @@
 <?php
+	function execInBackground($cmd) { 
+	    if (substr(php_uname(), 0, 7) == "Windows"){ 
+	        pclose(popen("start /B ". $cmd, "r"));  
+	    } 
+	    else { 
+	        exec($cmd . " > /dev/null &");   
+	    } 
+	} 
 	if(isset($_GET['location'])){
 		file_put_contents('coords.json', json_encode(array('location'=> $_GET['location'])));
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -25,7 +33,7 @@
 			$_COOKIE['pGo'] = $port;
 			$port++;
 			file_put_contents('port.conf', $port);
-			exec($command.' > /dev/null &');
+			execInBackground($command);
 		}
 		if(isset($_COOKIE['pGo'])){
 			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
