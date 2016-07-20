@@ -7,7 +7,7 @@
 		if(isset($_GET['steps'])){
 			$steps = $_GET['steps'];
 		}
-		$host = '127.0.0.1'
+		$host = '127.0.0.1';
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 			$host = '0.0.0.0';
 		}
@@ -23,9 +23,9 @@
 		file_put_contents('port.conf', $port);
 	}
 	if(isset($_COOKIE['pGo'])){
-		header('Location: '.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
+		header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
 	}
 	else{
-		header('Location: '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');
+		header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');
 	}
 ?>
