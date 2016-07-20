@@ -7,7 +7,7 @@
 	        exec($cmd . " > /dev/null &");   
 	    } 
 	} 
-	if(isset($_GET['location'])){
+	if(isset($_GET['location']) && isset($_COOKIE['pGo'])){
 		$coords = json_decode(file_get_contents('coords.json'), true);
 		if(!is_array($coords)){
 			$coords = array();
