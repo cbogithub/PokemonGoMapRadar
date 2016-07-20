@@ -181,10 +181,13 @@ def set_location(location_name):
     updateLocation()
 
     location_name = ''
-    try:
-        location_name = coords[args.port]
-    except NameError:
+    print '--------------------------------'
+    if str(args.port) in coords:
+        location_name = coords[str(args.port)]
+    else:
         location_name = 'Durango, Dgo.'
+    print location_name
+    print '--------------------------------'
 
     if prog.match(location_name):
         local_lat, local_lng = [float(x) for x in location_name.split(",")]
