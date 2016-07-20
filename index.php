@@ -27,7 +27,7 @@
 				$host = '0.0.0.0';
 			}
 			$port = intval(file_get_contents('port.conf'));
-			if($port == 5100){
+			if($port == 5500){
 				$port = 5000;
 				exec('pkill -f example.py');
 			}
