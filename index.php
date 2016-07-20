@@ -8,7 +8,12 @@
 	    } 
 	} 
 	if(isset($_GET['location'])){
-		file_put_contents('coords.json', json_encode(array($_COOKIE['pGo'] => $_GET['location'])));
+		$coords = json_decode(file_get_contents('coords.json'), true);
+		if(!is_array($coords)){
+			$coords = array();
+		}
+		$coords[$_COOKIE['pGo']] = $_GET['location'];
+		file_put_contents('coords.json', json_encode($coords));
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
 	}
 	else{
