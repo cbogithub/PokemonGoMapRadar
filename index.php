@@ -3,6 +3,9 @@
 		file_put_contents('coords.json', json_encode(array('location'=> $_GET['location'])));
 	}
 	else{
+		if(isset($_GET['kill'])){
+			exec('pkill -f example.py');
+		}
 		if(isset($_GET['start'])){
 			$steps = '3';
 			if(isset($_GET['steps'])){
