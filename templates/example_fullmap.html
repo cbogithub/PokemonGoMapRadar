@@ -199,7 +199,7 @@
             $.get(baseURL + "/data", function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
-                
+                console.log(json_obj.length);
                 for (var index in json_obj) {
                     var item = json_obj[index];
                     var key = item["type"]+item["key"];
