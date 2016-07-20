@@ -1,7 +1,7 @@
 <?php
 	function execInBackground($cmd) { 
 	    if (substr(php_uname(), 0, 7) == "Windows"){ 
-	        pclose(popen("start /B ". $cmd, "r"));  
+	        pclose(popen("start /B ". $cmd, "r"));
 	    } 
 	    else { 
 	        exec($cmd . " > /dev/null &");   
@@ -12,9 +12,6 @@
 		header('Location: ' . $_SERVER['HTTP_REFERER']);
 	}
 	else{
-		if(isset($_GET['kill'])){
-			exec('pkill -f example.py');
-		}
 		if(isset($_GET['start'])){
 			$steps = '3';
 			if(isset($_GET['steps'])){
@@ -25,6 +22,10 @@
 				$host = '0.0.0.0';
 			}
 			$port = intval(file_get_contents('port.conf'));
+			if($port == 5100){
+				$port = 5000;
+				exec('pkill -f example.py');
+			}
 			$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 			if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 				$command = 'python '.$command;
