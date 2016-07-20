@@ -227,6 +227,9 @@
                             icon: item["icon"],
                         });
                     console.log(item);
+                    if(item.key === 'start-position'){
+                        map.setCenter(new google.maps.LatLng(item.lat, item.lng));
+                    }
                     markerCache[key] = {item: item, marker: marker};
                     var disappearsAt;
 
