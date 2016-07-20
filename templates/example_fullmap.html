@@ -110,6 +110,7 @@
         var map = null;
         var markers = [];
         var markerCache = {};
+        var auto_refresh = 2000;
         // Adds a marker to the map and push to the array.
         function addMarker(options = {}) {
             var default_options = {map: map}
@@ -234,7 +235,7 @@
                             disappearsAt = new Date(parseInt(item["disappear_time"] * 1000)) - now;
                         }
                     } else {
-                        disappearsAt = {{ auto_refresh }} + 500;
+                        disappearsAt = auto_refresh + 500;
                     }
 
                     if (item["infobox"]) {
@@ -266,7 +267,7 @@
                 // deleteMarkers(markers.Length - json_obj.length);
             })
         }
-        window.setInterval(updateMap, {{ auto_refresh }});
+        window.setInterval(updateMap, auto_refresh);
     </script>
     <script type="text/javascript">
         $('#edit-button').click(function(){
