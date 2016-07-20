@@ -180,7 +180,7 @@ def set_location(location_name):
 
     updateLocation()
 
-    location_name = '';
+    location_name = ''
     try:
         location_name = coords[args.port]
     except NameError:
