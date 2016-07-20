@@ -20,7 +20,8 @@
             <div id="mapCanvas"></div>
             <form>
                 <input type="hidden" name="location">
-                <button type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button>
+                <button id="cancel" type="submit" style="font-size: 30px;margin-top: 10px;margin-right:20px;float: right;">Cancel</button>
+                <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button>
             </form>
         </section>
         <style type="text/css">
@@ -270,7 +271,7 @@
         window.setInterval(updateMap, auto_refresh);
     </script>
     <script type="text/javascript">
-        $('#edit-button').click(function(){
+        $('#edit-button, #form form #cancel').click(function(){
             form = $('#form');
             if(form.is(":visible")){
                 form.hide();
@@ -281,7 +282,7 @@
                 initialize();
             }
         })
-        $('#form form button').on('mousedown', function(){
+        $('#form form #submit').on('mousedown', function(){
             $('#form form').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar')
         }).on('mouseup', function(){
              $('#edit-button').click();

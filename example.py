@@ -85,7 +85,7 @@ is_ampm_clock = False
 search_thread = None
 
 def updateLocation():
-    global coords
+    global coords, args
     coords = json.load(open('coords.json'))
 
 def memoize(obj):
@@ -176,7 +176,6 @@ def set_location(location_name):
     global origin_lon
     global coords
     updateLocation()
-    print coords
 
     location_name = coords["location"]
 
@@ -779,6 +778,7 @@ app = create_app()
 @app.route('/data')
 def data():
     """ Gets all the PokeMarkers via REST """
+    retrying_set_location('')
     return json.dumps(get_pokemarkers())
 
 @app.route('/raw_data')
