@@ -25,7 +25,7 @@
 			$_COOKIE['pGo'] = $port;
 			$port++;
 			file_put_contents('port.conf', $port);
-			exec($command.' > /dev/null 2>/dev/null &');
+			exec($command.' > /dev/null &');
 		}
 		if(isset($_COOKIE['pGo'])){
 			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
