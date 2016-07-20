@@ -31,7 +31,12 @@
 			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
 		}
 		else{
-			header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');
+			if(strpos($_SERVER['REQUEST_URI'], '?') !== false){
+				header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&start');	
+			}
+			else{
+				header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');	
+			}
 		}
 	}
 ?>
