@@ -24,6 +24,7 @@
                 <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button>
             </form>
         </section>
+        <div id="message"><h1>BUSCANDO ...</h1><label>o tal vez los servidores no funcionan :v</label></div>
         <style type="text/css">
             #edit-button{
                     background-color: #02887b;
@@ -66,6 +67,21 @@
             }
             #infoPanel div {
                 margin-bottom: 5px;
+            }
+            #message{       
+                z-index: 400;
+                position: relative;
+                width: 90%;
+                max-width: 600px;
+                margin: auto;
+                text-align: center;
+                background: #00b9a9;
+                color: white;
+                font-family: roboto;
+                border-radius: 50px;
+            }
+            #message h1{
+                margin: 0;
             }
         </style>
 {{ fullmap.js }}
@@ -199,7 +215,12 @@
             $.get(baseURL + "/data", function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
-                console.log(json_obj.length);
+                if(json_obj.length > 1){
+                    $('#message').hide();
+                }
+                else{
+                    $('#message').show();   
+                }
                 for (var index in json_obj) {
                     var item = json_obj[index];
                     var key = item["type"]+item["key"];
