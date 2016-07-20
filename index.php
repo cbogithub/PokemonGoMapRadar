@@ -1,6 +1,7 @@
 <?php
 	if(isset($_GET['location'])){
 		file_put_contents('coords.json', json_encode(array('location'=> $_GET['location'])));
+		header('Location: ' . $_SERVER['HTTP_REFERER']);
 	}
 	else{
 		if(isset($_GET['kill'])){
@@ -26,14 +27,11 @@
 			file_put_contents('port.conf', $port);
 			exec($command);
 		}
-	}
-	if(isset($_COOKIE['pGo'])){
-		header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
-	}
-	else if(!isset($_GET['start'])) {
-		header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');
-	}
-	else{
-		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		if(isset($_COOKIE['pGo'])){
+			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
+		}
+		else{
+			header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');
+		}
 	}
 ?>
