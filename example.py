@@ -833,6 +833,13 @@ def next_loc():
 
 
 def get_pokemarkers():
+
+    global origin_lon, origin_lat
+    if type(origin_lat) == float:
+        origin_lat = 24.024051
+    if type(origin_lon) == float:
+        origin_lon = -104.647353
+        
     pokeMarkers = [{
         'icon': icons.dots.red,
         'lat': origin_lat,
