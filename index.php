@@ -6,7 +6,15 @@
 	    else { 
 	        exec($cmd . " > /dev/null &");   
 	    } 
-	} 
+	}
+	function init_start(){
+		if(strpos($_SERVER['REQUEST_URI'], '?') !== false){
+			header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&start');	
+		}
+		else{
+			header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');	
+		}
+	}
 	if(isset($_GET['location']) && isset($_COOKIE['pGo'])){
 		$coords = json_decode(file_get_contents('coords.json'), true);
 		if(!is_array($coords)){
@@ -42,16 +50,16 @@
 			execInBackground($command);
 		}
 		if(isset($_COOKIE['pGo'])){
-			sleep(10);
-			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
-		}
-		else{
-			if(strpos($_SERVER['REQUEST_URI'], '?') !== false){
-				header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'&start');	
+			if(intval($_COOKIE['pGo']) > 5015){
+				init_start();
 			}
 			else{
-				header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?start');	
+				sleep(10);
+				header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
 			}
+		}
+		else{
+			init_start();
 		}
 	}
 ?>
