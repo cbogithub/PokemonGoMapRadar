@@ -868,15 +868,16 @@ def get_pokemarkers():
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
 
-        pokeMarkers.append({
-            'type': 'pokemon',
-            'key': pokemon_key,
-            'disappear_time': pokemon['disappear_time'],
-            'icon': 'static/icons/%d.png' % pokemon["id"],
-            'lat': pokemon["lat"],
-            'lng': pokemon["lng"],
-            'infobox': label
-        })
+        if type(pokemon["lat"]) == float and type(pokemon["lng"]) == float:
+            pokeMarkers.append({
+                'type': 'pokemon',
+                'key': pokemon_key,
+                'disappear_time': pokemon['disappear_time'],
+                'icon': 'static/icons/%d.png' % pokemon["id"],
+                'lat': pokemon["lat"],
+                'lng': pokemon["lng"],
+                'infobox': label
+            })
 
     for gym_key in gyms:
         gym = gyms[gym_key]
