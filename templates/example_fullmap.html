@@ -21,7 +21,7 @@
         <div id="fullmap" style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;'>
             {{ fullmap.html }}
         </div>
-        <div id="edit-button"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+        <div id="edit-button">OK</div>
         <section id="form">
             <div id="infoPanel">
                 <b>Location:</b>
@@ -45,18 +45,20 @@
         <div id="message"><h1>BUSCANDO ...</h1><label>o tal vez los servidores no funcionan :v</label></div>
         <style type="text/css">
             #edit-button{
-                    background-color: #02887b;
+                    background-    background-color: #02887b;
                     color: white;
                     position: fixed;
                     bottom: 10px;
                     left: 10px;
                     border-radius: 50%;
                     z-index: 400;
-                    height: 90px;
+                    height: 80px;
                     width: 100px;
                     font-size: 75px;
                     text-align: center;
-                    padding-top: 10px;
+                    FONT-FAMILY: roboto;
+                    padding-top: 20px;
+                    font-size: 50px;
                     cursor: pointer;
             }
             #form{
@@ -359,8 +361,8 @@
             }
             else
             {
-                form.show();
-                initialize();
+                //form.show();
+                //initialize();
             }
             $('#form #data #submit').click();
         })
