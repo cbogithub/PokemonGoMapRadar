@@ -376,6 +376,29 @@
                 map: map,
             });
 
+            styledMap = new google.maps.StyledMapType([{
+                    stylers: [
+                        { hue: "#00ffe6" },
+                        { saturation: -20 }
+                    ]
+                },{
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [
+                        { lightness: 100 },
+                        { visibility: "simplified" }
+                    ]
+                },{
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [
+                        { visibility: "off" }
+                    ]
+                }
+            ],{name: "Styled Map"});
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style');
+
             updateMarkerPosition(latLng);
              google.maps.event.addListener(map, 'center_changed', function() {
                 window.setTimeout(function() {
