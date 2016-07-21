@@ -917,6 +917,10 @@ def get_pokemarkers():
 
 
 def get_map():
+    if type(origin_lat) == float:
+        origin_lat = 24.024051
+    if type(origin_lon) == float:
+        origin_lon = -104.647353
     fullmap = Map(
         identifier="fullmap2",
         style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;',
