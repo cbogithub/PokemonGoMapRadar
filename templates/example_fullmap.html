@@ -225,7 +225,7 @@
                     });
 
                     
-                    google.maps.event.addListener(map2, 'center_changed', function() {
+                    google.maps.event.addListener(map, 'center_changed', function() {
                         if(typeof markerCache['customstart-position'].marker !== 'undefined')
                         {
                             window.setTimeout(function() {
