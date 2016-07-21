@@ -226,7 +226,7 @@
 
                     
                     google.maps.event.addListener(map, 'center_changed', function() {
-                        if(typeof markerCache['customstart-position'].marker !== 'undefined')
+                        if(typeof markerCache['customstart-position'] !== 'undefined')
                         {
                             window.setTimeout(function() {
                                 markerCache['customstart-position'].marker.setPosition(map.getCenter());
