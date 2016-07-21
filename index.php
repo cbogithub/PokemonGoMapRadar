@@ -55,7 +55,7 @@
 			execInBackground($command);
 		}
 		if(isset($_COOKIE['pGo'])){
-			if(intval($_COOKIE['pGo']) > 5015){
+			if(intval($_COOKIE['pGo']) > 5015 && !isset($_GET['p'])) {
 				init_start();
 			}
 			else{
