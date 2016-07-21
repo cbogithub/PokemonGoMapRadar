@@ -928,7 +928,7 @@ def get_map():
         lat=origin_lat,
         lng=origin_lon,
         markers=get_pokemarkers(),
-        zoom='15', )
+        zoom='15')
     return fullmap
 
 
