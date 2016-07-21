@@ -917,6 +917,7 @@ def get_pokemarkers():
 
 
 def get_map():
+    global origin_lon, origin_lat
     if type(origin_lat) == float:
         origin_lat = 24.024051
     if type(origin_lon) == float:
