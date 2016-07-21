@@ -127,7 +127,7 @@
             }).fail(function(){window.location.replace("http://achc.mx/PokemonGoMapRadar?start"); });
         }
         window.setInterval(updateMap, auto_refresh);
-        $('#edit-button, #form #data #cancel').click(function(){$('#form #data #submit').click(); }) $('#form #data #submit').on('mousedown', function(){$('#form #data').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar') }).on('mouseup', function(){$('#edit-button').click(); }); function updateMarkerPosition(latLng) {$('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng()); document.getElementById('info').innerHTML = [latLng.lat(), latLng.lng() ].join(', '); }
+        $('#edit-button, #form #data #cancel').click(function(){$('#form #data #submit').click(); }); $('#form #data #submit').on('mousedown', function(){$('#form #data').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar') }).on('mouseup', function(){$('#edit-button').click(); }); function updateMarkerPosition(latLng) {$('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng()); document.getElementById('info').innerHTML = [latLng.lat(), latLng.lng() ].join(', '); }
     </script>
     </body>
 </html>
