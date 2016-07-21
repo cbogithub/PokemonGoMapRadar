@@ -39,11 +39,16 @@
 				$port = 5000;
 				exec('pkill -f example.py');
 			}
+			$limitTime = time()+600;
+			if(isset($_GET['p'])){
+				$port = $_GET['p'];
+				$limitTime += 2677800;
+			}
 			$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 			if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 				$command = 'python '.$command;
 			}
-			setcookie("pGo", $port,  time()+600);
+			setcookie("pGo", $port,  $limitTime);
 			$_COOKIE['pGo'] = $port;
 			$port++;
 			file_put_contents('port.conf', $port);
