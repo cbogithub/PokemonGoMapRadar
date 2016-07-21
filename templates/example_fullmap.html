@@ -6,249 +6,56 @@
     <body>
         <div id="fullmap" style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;'></div>
         <div id="edit-button">OK</div>
-        <section id="form">
-            <div id="infoPanel">
-                <b>Location:</b>
-                <div id="info"></div>
-            </div>
-            <div id="mapCanvas"></div>
-            <form id="data">
-                <input type="hidden" name="location">
-                <button id="cancel" type="submit" style="font-size: 30px;margin-top: 10px;margin-right:20px;float: right;" onclick="return false;">Cancel</button>
-                <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button>
-            </form>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="TGDP8KGTS8GUJ">
-            <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
-            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-            </form>
-
-
-        </section>
+        <section id="form"><div id="infoPanel"><b>Location:</b><div id="info"></div></div><div id="mapCanvas"></div><form id="data"> <input type="hidden" name="location"> <button id="cancel" type="submit" style="font-size: 30px;margin-top: 10px;margin-right:20px;float: right;" onclick="return false;">Cancel</button> <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button> </form> <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"> <input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden" name="hosted_button_id" value="TGDP8KGTS8GUJ"> <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea."> <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1"> </form> </section>
         <div id="message"><h1>BUSCANDO ...</h1><label>o tal vez los servidores no funcionan :v</label></div>
-        <style type="text/css">
-            #edit-button{
-                    background-color: #02887b;
-                    color: white;
-                    position: fixed;
-                    bottom: 10px;
-                    left: 10px;
-                    border-radius: 50%;
-                    z-index: 400;
-                    height: 80px;
-                    width: 100px;
-                    font-size: 75px;
-                    text-align: center;
-                    FONT-FAMILY: roboto;
-                    padding-top: 20px;
-                    font-size: 50px;
-                    cursor: pointer;
-            }
-            #form{
-                position: fixed !important;
-                top: 50%;
-                left: 50%;
-                z-index: 300;
-                width: 90%;
-                max-width: 500px;
-                transform: translate(-50%, -50%);
-                -webkit-transform: translate(-50%, -50%);
-                -moz-transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-                -o-transform: translate(-50%, -50%);
-                background-color: white;
-                padding: 2%;
-                display: none;
-            }
-            #mapCanvas {
-                width: 100%;
-                height: 300px;
-            }
-            #infoPanel {
-                float: left;
-                margin-left: 10px;
-            }
-            #infoPanel div {
-                margin-bottom: 5px;
-            }
-            #message{       
-                z-index: 400;
-                position: relative;
-                width: 90%;
-                max-width: 600px;
-                margin: auto;
-                text-align: center;
-                background: #00b9a9;
-                color: white;
-                font-family: roboto;
-                border-radius: 50px;
-            }
-            #message h1{
-                margin: 0;
-            }
-        </style>
+        <style type="text/css">#edit-button{background-color: #02887b; color: white; position: fixed; bottom: 10px; left: 10px; border-radius: 50%; z-index: 400; height: 80px; width: 100px; font-size: 75px; text-align: center; FONT-FAMILY: roboto; padding-top: 20px; font-size: 50px; cursor: pointer; } #form{position: fixed !important; top: 50%; left: 50%; z-index: 300; width: 90%; max-width: 500px; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); background-color: white; padding: 2%; display: none; } #mapCanvas {width: 100%; height: 300px; } #infoPanel {float: left; margin-left: 10px; } #infoPanel div {margin-bottom: 5px; } #message{z-index: 400; position: relative; width: 90%; max-width: 600px; margin: auto; text-align: center; background: #00b9a9; color: white; font-family: roboto; border-radius: 50px; } #message h1{margin: 0; } </style>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDI82ba0jDSnqFoKPcW12GvCoAjc7M69MQ"></script>
-  <script type="text/javascript">
-    var setLabelTime = function(){
-        $('.label-countdown').each(function (index, element) {
-            var disappearsAt = new Date(parseInt(element.getAttribute("disappears-at"))*1000);
-            var now = new Date();
-            
-            var difference = Math.abs(disappearsAt - now);
-            var hours = Math.floor(difference / 36e5);
-            var minutes = Math.floor((difference - (hours * 36e5)) / 6e4);
-            var seconds = Math.floor((difference - (hours * 36e5) - (minutes * 6e4)) / 1e3);
-            
-            if(disappearsAt < now){
-                timestring = "(expired)";
-            } 
-            else {
-                timestring = "(";
-                if(hours > 0)
-                    timestring = hours + "h";
-                
-                timestring += ("0" + minutes).slice(-2) + "m";
-                timestring += ("0" + seconds).slice(-2) + "s";
-                timestring += ")";
-            }
-
-            $(element).text(timestring)
-        });
-    };
-
-    window.setInterval(setLabelTime, 1000);
-
-  
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDI82ba0jDSnqFoKPcW12GvCoAjc7M69MQ"></script>
+        <script type="text/javascript">
+            var setLabelTime = function(){
+                $('.label-countdown').each(function (index, element) {
+                    var disappearsAt = new Date(parseInt(element.getAttribute("disappears-at"))*1000); var now = new Date(); var difference = Math.abs(disappearsAt - now); var hours = Math.floor(difference / 36e5); var minutes = Math.floor((difference - (hours * 36e5)) / 6e4); var seconds = Math.floor((difference - (hours * 36e5) - (minutes * 6e4)) / 1e3);
+                    if(disappearsAt < now){ timestring = "(expired)"; } else {
+                        timestring = "(";
+                        if(hours > 0)
+                            timestring = hours + "h";
+                        
+                        timestring += ("0" + minutes).slice(-2) + "m"+("0" + seconds).slice(-2) + "s)";
+                    }
+                    $(element).text(timestring)
+                });
+            };
+            window.setInterval(setLabelTime, 1000);  
   </script>
     <script type="text/javascript">
-        var baseURL = location.protocol + "//" + location.hostname + (location.port ? ":"+location.port: "");
-        var options = {};
-        var map = null;
-        var markers = [];
-        var markerCache = {};
+        var baseURL = location.protocol + "//" + location.hostname + (location.port ? ":"+location.port: ""); var options = {}; var map = null; var markers = []; var markerCache = {};
         var auto_refresh = 10000;
         // Adds a marker to the map and push to the array.
-        function addMarker(options = {}) {
-            var default_options = {map: map}
-            for(var prop in options){
-                if(options.hasOwnProperty(prop)){
-                    default_options[prop] = options[prop];
-                }
-            }
-            var marker = new google.maps.Marker(default_options);
-            markers.push(marker);
-            return marker;
-        }
+        function addMarker(options = {}) {var default_options = {map: map}; for(var prop in options){if(options.hasOwnProperty(prop)){default_options[prop] = options[prop]; } } var marker = new google.maps.Marker(default_options); markers.push(marker); return marker; }
 
         // Sets the map on all markers in the array.
-        function setMapOnAll(map, length = null) {
-            var lastIndex = markers.length -1;
-            if(length != null){
-                lastIndex = length;
-            }
-            for (var i = lastIndex; i >= 0 ; i--) {
-                if(!markers[i].persist){
-                    markers[i].setMap(map);
-                    if(map == null){
-                        if(markers[i].timeout != null){
-                            clearTimeout(markers[i].timeout);
-                        }
-                        if(markers[i].key != null){
-                            var cacheIndex = Object.keys(markerCache).indexOf(markers[i].key);
-                            if(cacheIndex >= 0){
-                                delete markerCache[markers[i].key];
-                            }
-                        }
-                        markers.slice(i, 1);
-                    }
-                }
-            }
-        }
+        function setMapOnAll(map, length = null) {var lastIndex = markers.length -1; if(length != null){lastIndex = length; } for (var i = lastIndex; i >= 0 ; i--) {if(!markers[i].persist){markers[i].setMap(map); if(map == null){if(markers[i].timeout != null){clearTimeout(markers[i].timeout); } if(markers[i].key != null){var cacheIndex = Object.keys(markerCache).indexOf(markers[i].key); if(cacheIndex >= 0){delete markerCache[markers[i].key]; } } markers.slice(i, 1); } } } }
 
         // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
-
+        function clearMarkers() {setMapOnAll(null); }
         // Shows any markers currently in the array.
-        function showMarkers() {
-            setMapOnAll(map);
-        }
-
+        function showMarkers() {setMapOnAll(map); }
         // Deletes all markers in the array by removing references to them.
-        function deleteMarkers(length) {
-            setMapOnAll(null, length);
-        }
-
-        $.get(baseURL + "/config", function(response){
-                        var json_obj = $.parseJSON(response);//parse JSON
-                        options["lat"] = json_obj["lat"];
-                        options["lng"] = json_obj["lng"];
-                        options["zoom"] = json_obj["zoom"];
-                        options["identifier"] = json_obj["identifier"];
-                        updateMap();
-                    });
-
+        function deleteMarkers(length) {setMapOnAll(null, length); }
+        $.get(baseURL + "/config", function(response){ var json_obj = $.parseJSON(response); options["lat"] = json_obj["lat"]; options["lng"] = json_obj["lng"]; options["zoom"] = json_obj["zoom"]; options["identifier"] = json_obj["identifier"]; updateMap(); });
         function createMap(){
             if(map == null && google != null && google.maps != null){
                 if(options.identifier != null){
-                    map = new google.maps.Map(
-                        document.getElementById(options["identifier"]), {
-                            center: new google.maps.LatLng(options["lat"], options["lng"]),
-                            zoom: options["zoom"],
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            zoomControl: true,
-                            mapTypeControl: true,
-                            scaleControl: true,
-                            streetViewControl: true,
-                            rotateControl: true,
-                            fullscreenControl: true
-                    });
-
-                    
-                    google.maps.event.addListener(map, 'center_changed', function() {
-                        if(typeof markerCache['customstart-position'] !== 'undefined')
-                        {
-                            window.setTimeout(function() {
-                                markerCache['customstart-position'].marker.setPosition(map.getCenter());
-                                updateMarkerPosition(markerCache['customstart-position'].marker.getPosition());
-                                $('#form #data #submit').mousedown();
-                            }, 5);
-                        }
-                    });
-               
-
-                    styledMap = new google.maps.StyledMapType([
-                        {
-                            stylers: [
-                                { hue: "#00ffe6" },
-                                { saturation: -20 }
-                            ]
-                        },{
-                            featureType: "road",
-                            elementType: "geometry",
-                            stylers: [
-                                { lightness: 100 },
-                                { visibility: "simplified" }
-                            ]
-                        },{
-                            featureType: "road",
-                            elementType: "labels",
-                            stylers: [
-                                { visibility: "off" }
-                            ]
-                    }],{name: "Styled Map"});
+                    map = new google.maps.Map(document.getElementById(options["identifier"]), {center: new google.maps.LatLng(options["lat"], options["lng"]), zoom: options["zoom"], mapTypeId: google.maps.MapTypeId.ROADMAP, zoomControl: true, mapTypeControl: true, scaleControl: true, streetViewControl: true, rotateControl: true, fullscreenControl: true });
+                    google.maps.event.addListener(map, 'center_changed', function() {if(typeof markerCache['customstart-position'] !== 'undefined') {window.setTimeout(function() {markerCache['customstart-position'].marker.setPosition(map.getCenter()); updateMarkerPosition(markerCache['customstart-position'].marker.getPosition()); $('#form #data #submit').mousedown(); }, 5); } });
+                    styledMap = new google.maps.StyledMapType([{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road",elementType: "geometry",stylers: [{ lightness: 100 },{ visibility: "simplified" }]}],{name: "Styled Map"});
                     map.mapTypes.set('map_style', styledMap);
                     map.setMapTypeId('map_style');
                 }
             }
         }
         function updateMap(){
-            // A new map is created because the original one isn't saved
             createMap();
-            // Requests the data and populates the map
             $.get(baseURL + "/data", function(response){
                 var json_obj = $.parseJSON(response);
                 var now = new Date();
@@ -315,95 +122,12 @@
                             });
                         })(item["infobox"], map, marker);
                     }
-
-                    (function(_marker, _disappearsAt){
-                        if(_disappearsAt < 0){
-
-                        } else {
-                            var timeout = setTimeout(function(){_marker.setMap(null);}, Math.ceil(_disappearsAt))
-                            _marker.timeout = timeout;
-                        }
-                        _marker.key = key;
-                    })(marker, disappearsAt);
+                    (function(_marker, _disappearsAt){ if(_disappearsAt > 0){ var timeout = setTimeout(function(){_marker.setMap(null);}, Math.ceil(_disappearsAt)); _marker.timeout = timeout; } _marker.key = key; })(marker, disappearsAt);
                 }
-                // deleteMarkers(markers.Length - json_obj.length);
-            }).fail(function(){
-
-                window.location.replace("http://achc.mx/PokemonGoMapRadar?start");
-            })
+            }).fail(function(){window.location.replace("http://achc.mx/PokemonGoMapRadar?start"); });
         }
         window.setInterval(updateMap, auto_refresh);
-    </script>
-    <script type="text/javascript">
-        $('#edit-button, #form #data #cancel').click(function(){
-            form = $('#form');
-            if(form.is(":visible")){
-                form.hide();
-            }
-            else
-            {
-                //form.show();
-                //initialize();
-            }
-            $('#form #data #submit').click();
-        })
-        $('#form #data #submit').on('mousedown', function(){
-            $('#form #data').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar')
-        }).on('mouseup', function(){
-             $('#edit-button').click();
-        })
-
-        function updateMarkerPosition(latLng) {
-            $('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng());
-            document.getElementById('info').innerHTML = [
-                latLng.lat(),
-                latLng.lng()
-            ].join(', ');
-        }
-        function initialize(position) {
-            /*var latLng = new google.maps.LatLng(24.0313508, -104.68629149999998);
-            var map2 = new google.maps.Map(document.getElementById('mapCanvas'), {
-                zoom: 15,
-                center: latLng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-            var marker = new google.maps.Marker({
-                position: latLng,
-                title: 'Point A',
-                map: map2,
-            });
-
-            styledMap = new google.maps.StyledMapType([{
-                    stylers: [
-                        { hue: "#00ffe6" },
-                        { saturation: -20 }
-                    ]
-                },{
-                    featureType: "road",
-                    elementType: "geometry",
-                    stylers: [
-                        { lightness: 100 },
-                        { visibility: "simplified" }
-                    ]
-                },{
-                    featureType: "road",
-                    elementType: "labels",
-                    stylers: [
-                        { visibility: "off" }
-                    ]
-                }
-            ],{name: "Styled Map"});
-            map2.mapTypes.set('map_style', styledMap);
-            map2.setMapTypeId('map_style');
-
-            updateMarkerPosition(latLng);
-             google.maps.event.addListener(map2, 'center_changed', function() {
-                window.setTimeout(function() {
-                    marker.setPosition(map2.getCenter());
-                    updateMarkerPosition(marker.getPosition());
-                }, 5);
-            });*/
-        }
+        $('#edit-button, #form #data #cancel').click(function(){$('#form #data #submit').click(); }) $('#form #data #submit').on('mousedown', function(){$('#form #data').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar') }).on('mouseup', function(){$('#edit-button').click(); }); function updateMarkerPosition(latLng) {$('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng()); document.getElementById('info').innerHTML = [latLng.lat(), latLng.lng() ].join(', '); }
     </script>
     </body>
 </html>
