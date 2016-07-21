@@ -54,7 +54,7 @@
 				init_start();
 			}
 			else{
-				sleep(10);
+				sleep(5);
 				header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
 			}
 		}
