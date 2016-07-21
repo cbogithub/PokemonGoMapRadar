@@ -361,7 +361,6 @@
                 position: latLng,
                 title: 'Point A',
                 map: map,
-                draggable: true
             });
 
             // Update current position info.
@@ -369,22 +368,9 @@
             geocodePosition(latLng);
              google.maps.event.addListener(map, 'center_changed', function() {
                 window.setTimeout(function() {
-                  marker.setPosition(map.getCenter());
-                }, 100);
-            });
-            // Add dragging event listeners.
-            google.maps.event.addListener(marker, 'dragstart', function () {
-                updateMarkerAddress('Dragging...');
-            });
-
-            google.maps.event.addListener(marker, 'drag', function () {
-                updateMarkerStatus('Dragging...');
-                updateMarkerPosition(marker.getPosition());
-            });
-
-            google.maps.event.addListener(marker, 'dragend', function () {
-                updateMarkerStatus('Drag ended');
-                geocodePosition(marker.getPosition());
+                    marker.setPosition(map.getCenter());
+                    updateMarkerPosition(marker.getPosition());
+                }, 20);
             });
         }
 
