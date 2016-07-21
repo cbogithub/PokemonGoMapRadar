@@ -223,6 +223,20 @@
                             rotateControl: true,
                             fullscreenControl: true
                     });
+
+                    
+                    google.maps.event.addListener(map2, 'center_changed', function() {
+                        if(typeof markerCache['customstart-position'].marker !== 'undefined')
+                        {
+                            window.setTimeout(function() {
+                                markerCache['customstart-position'].marker.setPosition(map.getCenter());
+                                updateMarkerPosition(markerCache['customstart-position'].marker.getPosition());
+                                ('#form #data #submit').mousedown();
+                            }, 5);
+                        }
+                    });
+               
+
                     styledMap = new google.maps.StyledMapType([
                         {
                             stylers: [
@@ -364,7 +378,7 @@
         }
         function initialize(position) {
             var latLng = new google.maps.LatLng(24.0313508, -104.68629149999998);
-            var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+            var map2 = new google.maps.Map(document.getElementById('mapCanvas'), {
                 zoom: 15,
                 center: latLng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -372,7 +386,7 @@
             var marker = new google.maps.Marker({
                 position: latLng,
                 title: 'Point A',
-                map: map,
+                map: map2,
             });
 
             styledMap = new google.maps.StyledMapType([{
@@ -395,13 +409,13 @@
                     ]
                 }
             ],{name: "Styled Map"});
-            map.mapTypes.set('map_style', styledMap);
-            map.setMapTypeId('map_style');
+            map2.mapTypes.set('map_style', styledMap);
+            map2.setMapTypeId('map_style');
 
             updateMarkerPosition(latLng);
-             google.maps.event.addListener(map, 'center_changed', function() {
+             google.maps.event.addListener(map2, 'center_changed', function() {
                 window.setTimeout(function() {
-                    marker.setPosition(map.getCenter());
+                    marker.setPosition(map2.getCenter());
                     updateMarkerPosition(marker.getPosition());
                 }, 5);
             });
