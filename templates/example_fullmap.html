@@ -28,11 +28,19 @@
                 <div id="info"></div>
             </div>
             <div id="mapCanvas"></div>
-            <form>
+            <form id="data">
                 <input type="hidden" name="location">
                 <button id="cancel" type="submit" style="font-size: 30px;margin-top: 10px;margin-right:20px;float: right;" onclick="return false;">Cancel</button>
                 <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button>
             </form>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="TGDP8KGTS8GUJ">
+            <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+            </form>
+
+
         </section>
         <div id="message"><h1>BUSCANDO ...</h1><label>o tal vez los servidores no funcionan :v</label></div>
         <style type="text/css">
@@ -305,7 +313,7 @@
         window.setInterval(updateMap, auto_refresh);
     </script>
     <script type="text/javascript">
-        $('#edit-button, #form form #cancel').click(function(){
+        $('#edit-button, #form #data #cancel').click(function(){
             form = $('#form');
             if(form.is(":visible")){
                 form.hide();
@@ -316,14 +324,14 @@
                 initialize();
             }
         })
-        $('#form form #submit').on('mousedown', function(){
-            $('#form form').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar')
+        $('#form #data #submit').on('mousedown', function(){
+            $('#form #data').attr('action', 'http://'+window.location.hostname+'/PokemonGoMapRadar')
         }).on('mouseup', function(){
              $('#edit-button').click();
         })
 
         function updateMarkerPosition(latLng) {
-            $('#form').find('form input[name="location"]').val(latLng.lat()+', '+latLng.lng());
+            $('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng());
             document.getElementById('info').innerHTML = [
                 latLng.lat(),
                 latLng.lng()
