@@ -367,7 +367,11 @@
             // Update current position info.
             updateMarkerPosition(latLng);
             geocodePosition(latLng);
-
+             google.maps.event.addListener(map, 'center_changed', function() {
+                window.setTimeout(function() {
+                  marker.setPosition(map.getCenter());
+                }, 100);
+            });
             // Add dragging event listeners.
             google.maps.event.addListener(marker, 'dragstart', function () {
                 updateMarkerAddress('Dragging...');
