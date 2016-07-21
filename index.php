@@ -42,6 +42,7 @@
 			execInBackground($command);
 		}
 		if(isset($_COOKIE['pGo'])){
+			sleep(10);
 			header('Location: http://'.$_SERVER['HTTP_HOST'].':'.$_COOKIE['pGo']);	
 		}
 		else{
