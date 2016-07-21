@@ -39,19 +39,22 @@
 				$port = 5000;
 				exec('pkill -f example.py');
 			}
-			$limitTime = time()+600;
+			$command = '';
 			if(isset($_GET['p'])){
-				$port = $_GET['p'];
-				$limitTime += 2677800;
+				$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
+				setcookie("pGo", $_GET['p'],  time()+2678400);
+				$_COOKIE['pGo'] = $_GET['p'];
 			}
-			$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
+			else{
+				$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
+				setcookie("pGo", $port,  time()+600);
+				$_COOKIE['pGo'] = $port;
+				$port++;
+				file_put_contents('port.conf', $port);
+			}
 			if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 				$command = 'python '.$command;
 			}
-			setcookie("pGo", $port,  $limitTime);
-			$_COOKIE['pGo'] = $port;
-			$port++;
-			file_put_contents('port.conf', $port);
 			execInBackground($command);
 		}
 		if(isset($_COOKIE['pGo'])){
