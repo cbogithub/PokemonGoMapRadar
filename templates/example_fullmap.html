@@ -223,35 +223,31 @@
                             rotateControl: true,
                             fullscreenControl: true
                     });
+                    styledMap = new google.maps.StyledMapType([
+                        {
+                            stylers: [
+                                { hue: "#00ffe6" },
+                                { saturation: -20 }
+                            ]
+                        },{
+                            featureType: "road",
+                            elementType: "geometry",
+                            stylers: [
+                                { lightness: 100 },
+                                { visibility: "simplified" }
+                            ]
+                        },{
+                            featureType: "road",
+                            elementType: "labels",
+                            stylers: [
+                                { visibility: "off" }
+                            ]
+                    }],{name: "Styled Map"});
+                    map.mapTypes.set('map_style', styledMap);
+                    map.setMapTypeId('map_style');
                 }
             }
-            if(styles !== false){
-                styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
-                map.mapTypes.set('map_style', styledMap);
-                map.setMapTypeId('map_style');
-                styles = false;
-            }
         }
-        var styles = [{
-                stylers: [
-                    { hue: "#00ffe6" },
-                    { saturation: -20 }
-                ]
-            },{
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [
-                    { lightness: 100 },
-                    { visibility: "simplified" }
-                ]
-            },{
-                featureType: "road",
-                elementType: "labels",
-                stylers: [
-                    { visibility: "off" }
-                ]
-            }
-        ];
         function updateMap(){
             // A new map is created because the original one isn't saved
             createMap();
@@ -334,6 +330,8 @@
                     })(marker, disappearsAt);
                 }
                 // deleteMarkers(markers.Length - json_obj.length);
+            }).error(function(){
+                window.location.replace("go.achc.mx");
             })
         }
         window.setInterval(updateMap, auto_refresh);
