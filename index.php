@@ -34,18 +34,22 @@
 			if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 				$host = '0.0.0.0';
 			}
-			$port = intval(file_get_contents('port.conf'));
-			if($port > 5015){
-				$port = 5000;
-				exec('pkill -f example.py');
-			}
 			$command = '';
+			if(isset($_COOKIE['pGoPro'])) {
+				$_GET['p'] = $_COOKIE['pGoPro'];
+			}
 			if(isset($_GET['p'])){
 				$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
 				setcookie("pGo", $_GET['p'],  time()+2678400);
+				setcookie("pGoPro", $_GET['p'],  time()+2678400);
 				$_COOKIE['pGo'] = $_GET['p'];
 			}
 			else{
+				$port = intval(file_get_contents('port.conf'));
+				if($port > 5015){
+					$port = 5000;
+					exec('pkill -f example.py');
+				}
 				$command = 'example.py -u panferno44 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 				setcookie("pGo", $port,  time()+600);
 				$_COOKIE['pGo'] = $port;
