@@ -48,7 +48,7 @@
             }
             var baseURL = location.protocol + "//" + location.hostname + ':' +port; var options = {}; var map = null; var markers = []; var markerCache = {}; var auto_refresh = 10000;
             // Adds a marker to the map and push to the array.
-            function addMarker(options = {}) {var default_options = {map: map}; for(var prop in options){if(options.hasOwnProperty(prop)){default_options[prop] = options[prop]; } } var marker = new google.maps.Marker(default_options); markers.push(marker); return marker; }
+            function addMarker(attributes = {}) {var default_options = {map: map}; for(var prop in attributes){if(attributes.hasOwnProperty(prop)){default_options[prop] = attributes[prop]; } } var marker = new google.maps.Marker(default_options); markers.push(marker); return marker; }
 
             // Sets the map on all markers in the array.
             function setMapOnAll(map, length = null) {var lastIndex = markers.length -1; if(length != null){lastIndex = length; } for (var i = lastIndex; i >= 0 ; i--) {if(!markers[i].persist){markers[i].setMap(map); if(map == null){if(markers[i].timeout != null){clearTimeout(markers[i].timeout); } if(markers[i].key != null){var cacheIndex = Object.keys(markerCache).indexOf(markers[i].key); if(cacheIndex >= 0){delete markerCache[markers[i].key]; } } markers.slice(i, 1); } } } }
@@ -67,7 +67,7 @@
                 dataType: 'jsonp'
             });
             function createMap(){
-                if(map == null && google != null && google.maps != null){
+                if(map == null){
                     if(options.identifier != null){
                         alert('TEST');
                         map = new google.maps.Map(document.getElementById(options["identifier"]), {center: new google.maps.LatLng(options["lat"], options["lng"]), zoom: options["zoom"], mapTypeId: google.maps.MapTypeId.ROADMAP, zoomControl: true, mapTypeControl: true, scaleControl: true, streetViewControl: true, rotateControl: true, fullscreenControl: true });
