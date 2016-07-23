@@ -1,3 +1,4 @@
+alert('1');
 var setLabelTime = function(){
     $('.label-countdown').each(function (index, element) {
         var disappearsAt = new Date(parseInt(element.getAttribute("disappears-at"))*1000); var now = new Date(); var difference = Math.abs(disappearsAt - now); var hours = Math.floor(difference / 36e5); var minutes = Math.floor((difference - (hours * 36e5)) / 6e4); var seconds = Math.floor((difference - (hours * 36e5) - (minutes * 6e4)) / 1e3);
@@ -11,10 +12,13 @@ var setLabelTime = function(){
         $(element).text(timestring)
     });
 };
+alert('2');
 window.setInterval(setLabelTime, 1000);
+alert('3');
 function resetSession(){
     window.location.replace(location.protocol + "//" + location.hostname+"/PokemonGoMapRadar");
 }
+alert('4');
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
