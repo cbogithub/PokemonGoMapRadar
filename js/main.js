@@ -59,14 +59,24 @@ var baseURL = location.protocol + "//" + location.hostname + ':' +port; var opti
                     map.setMapTypeId('map_style');
                 }
             }
+            serverConections = 0;
             function data(response){
                 var json_obj = response;
                 var now = new Date();
                 if(json_obj.length > 1){
-                    $('#message').hide();
+                    $('#message.search').hide();
+                    serverConections = 0;
                 }
                 else{
-                    $('#message').show();   
+                    serverConections++;
+                    if(serverConections > 3){
+                        $('#message.error').show();
+                        $('#message.search').hide();
+
+                    }
+                    else{
+                        $('#message.search').show();
+                    }
                 }
                 for (var index in json_obj) {
                     var item = json_obj[index];
