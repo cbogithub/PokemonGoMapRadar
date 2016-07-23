@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81128601-1', 'auto'); ga('send', 'pageview'); </script>
+    <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-81128601-1', 'auto'); ga('send', 'pageview');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pokemon Go Map - por Saulo 7u7</title> 
@@ -11,17 +12,12 @@
 </head>
 <body>
     <div id="fullmap" style='height:100%;width:100%;top:0;left:0;position:absolute;z-index:200;'></div>
-    <div id="edit-button"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-    <div id="edit-button" class="gps"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-    <section id="form"><div id="infoPanel"><b>Location:</b><div id="info"></div></div><div id="mapCanvas"></div><form id="data"> <input type="hidden" name="location"> <button id="cancel" type="submit" style="font-size: 30px;margin-top: 10px;margin-right:20px;float: right;" onclick="return false;">Cancel</button> <button id="submit" type="submit" style="font-size: 30px;margin-top: 10px;float: right;">Submit</button> </form> <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"> <input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden" name="hosted_button_id" value="TGDP8KGTS8GUJ"> <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea."> <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1"> </form> </section>
+    <div id="edit-button"></div>
+    <div id="edit-button" class="gps"></div>
+    <section id="form"><form id="data"> <input type="hidden" name="location"> <button id="cancel" type="submit">Cancel</button> <button id="submit" type="submit">Submit</button> </form></section>
     <div id="message" class="search"><h1><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> SEARCHING ...</h1></div>
     <div id="message" class="error"><h1>POKEMON SERVER DOWN</h1><label>-_-</label></div>
     <script type="text/javascript">
-    $(document).ready(function(){
-        alert('test');
-        $('#message').html('TESSSST');  
-    })
-        alert('test 2');
             var setLabelTime = function(){
                 $('.label-countdown').each(function (index, element) {
                     var disappearsAt = new Date(parseInt(element.getAttribute("disappears-at"))*1000); var now = new Date(); var difference = Math.abs(disappearsAt - now); var hours = Math.floor(difference / 36e5); var minutes = Math.floor((difference - (hours * 36e5)) / 6e4); var seconds = Math.floor((difference - (hours * 36e5) - (minutes * 6e4)) / 1e3);
