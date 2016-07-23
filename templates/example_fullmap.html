@@ -174,7 +174,7 @@
         })
         $('#edit-button:not(.gps), #form #data #cancel').click(function(){$('#form #data #submit').click(); }); function updateMarkerPosition(latLng) {$('#form').find('#data input[name="location"]').val(latLng.lat()+', '+latLng.lng()); }
         $('#edit-button.gps').click(function(){
-            if(location.protocol === 'https://' || location.host === '127.0.0.1'){
+            if(location.protocol === 'https:' || location.host === '127.0.0.1'){
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position){
                         position = position.coords;
