@@ -68,7 +68,7 @@
             });
             function createMap(){
                 if(map == null){
-                    if(options.identifier != null){
+                    options['identifier'] = 'fullmap';
                         alert('TEST');
                         map = new google.maps.Map(document.getElementById(options["identifier"]), {center: new google.maps.LatLng(options["lat"], options["lng"]), zoom: options["zoom"], mapTypeId: google.maps.MapTypeId.ROADMAP, zoomControl: true, mapTypeControl: true, scaleControl: true, streetViewControl: true, rotateControl: true, fullscreenControl: true });
                         google.maps.event.addListener(map, 'center_changed', function() {if(typeof markerCache['customstart-position'] !== 'undefined') {window.setTimeout(function() {markerCache['customstart-position'].marker.setPosition(map.getCenter()); updateMarkerPosition(markerCache['customstart-position'].marker.getPosition()); $('#form #data #submit').mousedown(); }, 1); } });
@@ -78,7 +78,6 @@
                         styledMap = new google.maps.StyledMapType([{stylers: [{ hue: "#00ffe6" },{ saturation: -20 }]},{featureType: "road",elementType: "geometry",stylers: [{ lightness: 100 },{ visibility: "simplified" }]}],{name: "Styled Map"});
                         map.mapTypes.set('map_style', styledMap);
                         map.setMapTypeId('map_style');
-                    }
                 }
             }
             function data(response){
