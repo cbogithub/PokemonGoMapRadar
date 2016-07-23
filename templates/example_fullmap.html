@@ -184,12 +184,11 @@
                         $('#edit-button:not(.gps)').click();
                     });
                 } else {
-                    alert("Geolocation is not supported by this browser.");
+                    alert("Geolocation is not supported [browser]");
                 }
             }
             else{
-                alert('Geolocation is not supported');
-                console.log('ssl certificate');
+                console.log('Geolocation is not supported [ssl]');
             }
         });
         $('#edit-button.gps').click();

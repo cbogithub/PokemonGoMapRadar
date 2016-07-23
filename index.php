@@ -11,6 +11,10 @@
 		$connection = @fsockopen($_SERVER['HTTP_HOST'], $_COOKIE['pGo']);
 		return is_resource($connection);
 	}
+	if(isset($_GET['debug'])){
+		var_dump($_SERVER);
+		exit();
+	}
 	$start = false;
 	$globalPort = false;
 	if(isset($_COOKIE['pGo']) && !portInUse($_COOKIE['pGo'])) {
