@@ -1,4 +1,8 @@
 <?php
+	if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off"){
+    	header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    	exit();
+	}
 	function execInBackground($cmd) { 
 	    if (substr(php_uname(), 0, 7) == "Windows"){ 
 	        pclose(popen("start /B ". $cmd, "r"));
@@ -10,10 +14,6 @@
 	function portInUse($port){
 		$connection = @fsockopen($_SERVER['HTTP_HOST'], $_COOKIE['pGo']);
 		return is_resource($connection);
-	}
-	if(isset($_GET['debug'])){
-		var_dump($_SERVER);
-		exit();
 	}
 	$start = false;
 	$globalPort = false;
