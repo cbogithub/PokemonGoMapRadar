@@ -789,7 +789,7 @@ app = create_app()
 def data():
     """ Gets all the PokeMarkers via REST """
     retrying_set_location('')
-    return json.dumps(get_pokemarkers())
+    return 'data('+json.dumps(get_pokemarkers())+');'
 
 @app.route('/raw_data')
 def raw_data():
@@ -806,7 +806,7 @@ def config():
         'zoom': 15,
         'identifier': "fullmap"
     }
-    return json.dumps(center)
+    return 'config(' + json.dumps(center) + ');'
 
 
 @app.route('/')
