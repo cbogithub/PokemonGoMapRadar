@@ -49,7 +49,7 @@
             resetSession();
             throw new Error("No port assigned");
         }
-        var baseURL = "http://" + location.hostname + ':' +port; var options = {}; var map = null; var markers = []; var markerCache = {}; var auto_refresh = 10000;
+        var baseURL = location.protocol + "//" + location.hostname + ':' +port; var options = {}; var map = null; var markers = []; var markerCache = {}; var auto_refresh = 10000;
         // Adds a marker to the map and push to the array.
         function addMarker(options = {}) {var default_options = {map: map}; for(var prop in options){if(options.hasOwnProperty(prop)){default_options[prop] = options[prop]; } } var marker = new google.maps.Marker(default_options); markers.push(marker); return marker; }
 

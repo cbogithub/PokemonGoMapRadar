@@ -1,7 +1,7 @@
 <?php
 	if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off"){
-    	header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    	exit();
+    	//header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    	//exit();
 	}
 	function execInBackground($cmd) { 
 	    if (substr(php_uname(), 0, 7) == "Windows"){ 
