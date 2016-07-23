@@ -45,7 +45,7 @@
 		}
 		else{
 			$port = intval(file_get_contents('port.conf'));
-			if($port > 5500){
+			if($port > 5020){
 				$port = 5000;
 				exec('pkill -f example.py');
 			}
