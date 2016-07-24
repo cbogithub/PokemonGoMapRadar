@@ -183,7 +183,10 @@ def set_location(location_name):
     location_name = ''
     print '--------------------------------'
     if str(args.port) in coords:
-        location_name = coords[str(args.port)]
+        if coords[str(args.port)] == "":
+            location_name = 'Durango, Dgo.'
+        else:
+            location_name = coords[str(args.port)]
     else:
         location_name = 'Durango, Dgo.'
     print location_name
