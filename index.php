@@ -72,7 +72,7 @@
 		file_put_contents('coords.json', json_encode($coords));
 	}
 	if(isset($_GET['remote_UI'])){
-		echo json_encode(array('port'=>$globalPort));
+		echo 'init('.json_encode(array('port'=>$globalPort)).')';
 	}
 	else if(!isset($_GET['location'])){
 		echo file_get_contents('templates/example_fullmap.html');	
