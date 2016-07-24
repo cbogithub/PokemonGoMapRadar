@@ -50,7 +50,7 @@ var baseURL = location.protocol + "//" + location.hostname + ':' +port; var opti
                 if(map == null){
                     options['identifier'] = 'fullmap';
                     map = new google.maps.Map(document.getElementById(options["identifier"]), {center: new google.maps.LatLng(options["lat"], options["lng"]), zoom: options["zoom"], mapTypeId: google.maps.MapTypeId.ROADMAP, zoomControl: true, mapTypeControl: true, scaleControl: true, streetViewControl: true, rotateControl: true, fullscreenControl: true });
-                    google.maps.event.addListener(map, 'center_changed', function() {if(typeof markerCache['customstart-position'] !== 'undefined') {window.setTimeout(function() {markerCache['customstart-position'].marker.setPosition(map.getCenter()); updateMarkerPosition(markerCache['customstart-position'].marker.getPosition()); $('#form #data #submit').mousedown(); }, 1); } });
+                    google.maps.event.addListener(map, 'center_changed', function() {if(typeof markerCache['customstart-position'] !== 'undefined') {window.setTimeout(function() {markerCache['customstart-position'].marker.setPosition(map.getCenter()); updateMarkerPosition(markerCache['customstart-position'].marker.getPosition()); $('#form #data #submit').mousedown(); }, 1); } else{ updateMarkerPosition(map.getCenter()); $('#form #data #submit').mousedown(); } });
                     google.maps.event.addListener(map, 'idle', function() {
                         $('#edit-button:not(".gps")').click();
                     });
