@@ -17,10 +17,7 @@
 	}
 	$start = false;
 	$globalPort = false;
-	if(isset($_COOKIE['pGo']) && !portInUse($_COOKIE['pGo'])) {
-    	$start = true;
-	}
-	else if(!isset($_COOKIE['pGo'])){
+	if((isset($_COOKIE['pGo']) && !portInUse($_COOKIE['pGo'])) || isset($_GET['remote_UI']) || !isset($_COOKIE['pGo'])) {
     	$start = true;
 	}
 	if($start) {
