@@ -71,5 +71,7 @@
 		$coords[$_COOKIE['pGo']] = $_GET['location'];
 		file_put_contents('coords.json', json_encode($coords));
 	}
-	echo file_get_contents('templates/example_fullmap.html');
+	if(!isset($_GET['location'])){
+		echo file_get_contents('templates/example_fullmap.html');	
+	}
 ?>
