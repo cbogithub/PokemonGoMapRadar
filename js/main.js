@@ -65,6 +65,7 @@ var baseURL = location.protocol + "//" + location.hostname + ':' +port; var opti
                 var now = new Date();
                 if(json_obj.length > 1){
                     $('#message.search').hide();
+                    $('#message.error').hide();
                     serverConections = 0;
                 }
                 else{
