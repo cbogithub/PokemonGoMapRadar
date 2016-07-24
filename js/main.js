@@ -176,6 +176,7 @@ var baseURL = location.protocol + "//" + location.hostname + ':' +port; var opti
                 }
                 else{
                     console.log('Geolocation is not supported [ssl]');
+                    $('#edit-button:not(.gps)').click();
                 }
             });
             $('#edit-button.gps').click();
