@@ -806,7 +806,7 @@ def config():
     center = {
         'lat': FLOAT_LAT,
         'lng': FLOAT_LONG,
-        'zoom': 15,
+        'zoom': 17,
         'identifier': "fullmap"
     }
     return 'config(' + json.dumps(center) + ');'
