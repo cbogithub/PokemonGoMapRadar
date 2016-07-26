@@ -3,6 +3,9 @@
     	//header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     	//exit();
 	}
+	if(isset($_GET['kill'])){
+		var_dump(exec('pkill -f example.py'));exit();
+	}
 	function execInBackground($cmd) { 
 	    if (substr(php_uname(), 0, 7) == "Windows"){ 
 	        pclose(popen("start /B ". $cmd, "r"));
