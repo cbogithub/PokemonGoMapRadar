@@ -844,7 +844,7 @@ def get_pokemarkers():
         origin_lon = -104.647353
         
     pokeMarkers = [{
-        'icon': icons.dots.red,
+        'icon': 'static/pokemarker-30.png',
         'lat': origin_lat,
         'lng': origin_lon,
         'infobox': "Start position",
