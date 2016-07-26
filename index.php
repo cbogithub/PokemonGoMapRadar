@@ -24,7 +24,7 @@
     	$start = true;
 	}
 	if($start) {
-		$steps = '2';
+		$steps = '3';
 		if(isset($_GET['steps'])){
 			$steps = $_GET['steps'];
 		}
