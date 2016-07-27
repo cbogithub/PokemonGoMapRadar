@@ -50,7 +50,7 @@
 				//exec('pkill -f example.py');
 			}
 			$globalPort = $port;
-			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
+			$command = 'example.py -u samianpan2 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 			setcookie("pGo", $port,  time()+600);
 			$_COOKIE['pGo'] = $port;
 			$port++;
@@ -59,12 +59,12 @@
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 			$command = 'python '.$command;
 		}
-		$users = array(
+		/*$users = array(
 			'panferno44',
 			'samianpan2'
 		);
 		$user = array_rand($users, 1);
-		$command = str_replace('-user', $user[0], $command);
+		$command = str_replace('-user', $user[0], $command);*/
 		if(!portInUse($globalPort)){
 			execInBackground($command);	
 		}
