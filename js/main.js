@@ -9,7 +9,7 @@ var auto_refresh = 10000;
 var serverConections = 0;
 var infoWindows = [];
 var processData = true;
-
+var allSet = false;
 var setLabelTime = function() {
     $('.label-countdown').each(function(index, element) {
         $(element).parents().eq(3).addClass('infobox');
@@ -227,7 +227,10 @@ function config(response) {
     options["zoom"] = json_obj["zoom"];
     options["identifier"] = json_obj["identifier"];
     updateMap();
-    window.setInterval(updateMap, auto_refresh);
+    if(!allSet){
+        window.setInterval(updateMap, auto_refresh);
+        allSet = true;
+    }
 }
 
 function deleteMarkers(length) {
@@ -289,7 +292,7 @@ function resetSession(){
         error: function(e) {
             if (e.status !== 200) {
                 $('#message.error.server').show();
-                resetSession();
+                setTimeout(resetSession, 5000);
             }
             else{
                 $('#message.error.server').hide();
