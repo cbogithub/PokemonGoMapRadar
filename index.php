@@ -38,7 +38,7 @@
 		}
 		if(isset($_GET['p'])){
 			$globalPort = $_GET['p'];
-			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
+			$command = 'example.py -u samianpan2 -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
 			setcookie("pGo", $_GET['p'],  time()+2678400);
 			setcookie("pGoPro", $_GET['p'],  time()+2678400);
 			$_COOKIE['pGo'] = $_GET['p'];
@@ -64,7 +64,7 @@
 			'samianpan2'
 		);
 		$user = array_rand($users, 1);
-		str_replace('-user', $user[0], $command);
+		$command = str_replace('-user', $user[0], $command);
 		if(!portInUse($globalPort)){
 			execInBackground($command);	
 		}
