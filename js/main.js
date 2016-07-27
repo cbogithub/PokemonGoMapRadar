@@ -286,19 +286,21 @@ function createMap(force) {
 }
 function resetSession(){
     baseURL = "http://achc.mx";
-    $.ajax({
-        url: baseURL + "/PokemonGoMapRadar/?remote_UI",
-        dataType: 'jsonp',
-        error: function(e) {
-            if (e.status !== 200) {
-                $('#message.error.server').show();
-                setTimeout(resetSession, 5000);
+    $('#message.error.server').show();
+    setTimeout(function(){
+        $.ajax({
+            url: baseURL + "/PokemonGoMapRadar/?remote_UI",
+            dataType: 'jsonp',
+            error: function(e) {
+                if (e.status !== 200) {
+                    resetSession();
+                }
+                else{
+                    $('#message.error.server').hide();
+                }
             }
-            else{
-                $('#message.error.server').hide();
-            }
-        }
-    });
+        });
+    }, 5000);
 }
 function updateMap() {
     createMap();
