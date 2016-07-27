@@ -47,7 +47,7 @@
 			$port = intval(file_get_contents('port.conf'));
 			if($port > 5015){
 				$port = 5000;
-				exec('pkill -f example.py');
+				//exec('pkill -f example.py');
 			}
 			$globalPort = $port;
 			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
