@@ -862,7 +862,7 @@ def get_pokemarkers():
         	dateoutput = datestr.strftime("%I:%M%p").lstrip('0')
         pokemon['disappear_time_formatted'] = dateoutput
 
-        LABEL_TMPL = u'''<div><small><a href='http://www.pokemon.com/us/pokedex/{id}' target='_blank' title='View in Pokedex'>#{id}</a></small></div><span class='label-countdown' '{disappear_time}'></span>'''
+        LABEL_TMPL = u'''<span class="label-countdown" disappears-at='{disappear_time}'></span>'''
         label = LABEL_TMPL.format(**pokemon)
         #  NOTE: `infobox` field doesn't render multiple line string in frontend
         label = label.replace('\n', '')
