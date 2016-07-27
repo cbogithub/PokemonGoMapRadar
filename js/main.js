@@ -1,6 +1,18 @@
 // START_CUSTOM_CODE_home
+var port = 5000;
+var baseURL = "http://achc.mx";
+var options = {};
+var map = null;
+var markers = [];
+var markerCache = {};
+var auto_refresh = 5000;
+var serverConections = 0;
+var infoWindows = [];
+var processData = true;
+
 var setLabelTime = function() {
     $('.label-countdown').each(function(index, element) {
+        $(element).parents().eq(3).addClass('infobox');
         var disappearsAt = new Date(parseInt(element.getAttribute("disappears-at")) * 1000);
         var now = new Date();
         var difference = Math.abs(disappearsAt - now);
@@ -11,11 +23,11 @@ var setLabelTime = function() {
         if (disappearsAt < now) {
             timestring = "(expired)";
         } else {
-            timestring = "(";
+            timestring = "";
             if (hours > 0)
                 timestring = hours + "h";
 
-            timestring += ("0" + minutes).slice(-2) + "m" + ("0" + seconds).slice(-2) + "s)";
+            timestring += ("0" + minutes).slice(-2) + "m" + ("0" + seconds).slice(-2) + "s";
         }
         $(element).text(timestring)
     });
@@ -37,7 +49,6 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
-var serverConections = 0;
 function data(response) {
     if(map === null || typeof google.maps == 'undefined'){
         return false;
@@ -114,13 +125,14 @@ function data(response) {
                     content: _infobox
                 });
                 _marker.addListener('click', function() {
+                    closeAllInfoWindows();
                     _marker.infoWindow.open(_map, _marker);
                     _marker["persist"] = true;
                 });
-
                 google.maps.event.addListener(_marker.infoWindow, 'closeclick', function() {
                     _marker["persist"] = null;
                 });
+                infoWindows.push(_marker.infoWindow); 
             })(item["infobox"], map, marker);
         }
         (function(_marker, _disappearsAt) {
@@ -134,14 +146,11 @@ function data(response) {
         })(marker, disappearsAt);
     }
 }
-var port = 5000;
-var baseURL = "http://achc.mx";
-var options = {};
-var map = null;
-var markers = [];
-var markerCache = {};
-var auto_refresh = 10000;
-
+function closeAllInfoWindows() {
+  for (var i=0;i<infoWindows.length;i++) {
+     infoWindows[i].close();
+  }
+}
 function init(data) {
     port = data.port;
     baseURL += ':' + port;
@@ -150,11 +159,11 @@ function init(data) {
         dataType: 'jsonp',
         error: function(e) {
             if (e.status !== 200) {
-                $('#message.error').show();
+                $('#message.error.server').show();
                 resetSession();
             }
             else{
-                $('#message.error').hide();
+                $('#message.error.server').hide();
             }
         }
     });
@@ -212,6 +221,7 @@ function showMarkers() {
 // Deletes all markers in the array by removing references to them.
 function config(response) {
     var json_obj = response;
+    processData = true;
     options["lat"] = json_obj["lat"];
     options["lng"] = json_obj["lng"];
     options["zoom"] = json_obj["zoom"];
@@ -266,37 +276,44 @@ function createMap(force) {
             name: "Styled Map"
         }));
         map.setMapTypeId('map_style');
-        $('#edit-button.gps').click();
-        $('#edit-button.gps').show();
+        setTimeout(function(){
+            $('#edit-button.gps').show().click();
+        }, 1000)
     }
 }
 function resetSession(){
     baseURL = "http://achc.mx";
     $.ajax({
-        url: baseURL + "/PokemonGoMapRadar?remote_UI",
+        url: baseURL + "/PokemonGoMapRadar/?remote_UI",
         dataType: 'jsonp',
         error: function(e) {
             if (e.status !== 200) {
-                $('#message.error').show();
+                $('#message.error.server').show();
                 resetSession();
             }
             else{
-                $('#message.error').hide();
+                $('#message.error.server').hide();
             }
         }
     });
 }
 function updateMap() {
     createMap();
-    $.ajax({
-        url: baseURL + "/data",
-        dataType: 'jsonp',
-        error: function(e) {
-            if (e.status !== 200) {
-                resetSession();
+    if(processData){
+        processData = false;
+        $.ajax({
+            url: baseURL + "/data",
+            dataType: 'jsonp',
+            error: function(e) {
+                if (e.status !== 200) {
+                    resetSession();
+                }
+                else{
+                    processData = true;
+                }
             }
-        }
-    });
+        });   
+    }
 }
 $(document).on('submit', '#form #data', function() {
     var elm = $(this);
@@ -317,6 +334,7 @@ $(document).on("click", '#edit-button.gps', function() {
         navigator.geolocation.getCurrentPosition(function(position) {
             var gpsLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(gpsLocation);
+            serverConections = 0;
             $('#edit-button:not(.gps)').click();
         }, 
         function(error) {
@@ -325,5 +343,6 @@ $(document).on("click", '#edit-button.gps', function() {
         });   
     }
 });
-$.ajax({url: baseURL + "/PokemonGoMapRadar?remote_UI",dataType: 'jsonp'});
+$('.km-scroll-container, #fullmap').height($(window).height());
+resetSession();
 // END_CUSTOM_CODE_home

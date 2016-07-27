@@ -18,7 +18,7 @@
 		$connection = @fsockopen($_SERVER['HTTP_HOST'], $_COOKIE['pGo']);
 		return is_resource($connection);
 	}
-	$start = false;
+	$start = true;
 	$globalPort = false;
 	if((isset($_COOKIE['pGo']) && !portInUse($_COOKIE['pGo'])) || isset($_GET['remote_UI']) || !isset($_COOKIE['pGo'])) {
     	$start = true;
@@ -38,7 +38,7 @@
 		}
 		if(isset($_GET['p'])){
 			$globalPort = $_GET['p'];
-			$command = 'example.py -u samianpan2 -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
+			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$_GET['p'].' -st '.$steps;
 			setcookie("pGo", $_GET['p'],  time()+2678400);
 			setcookie("pGoPro", $_GET['p'],  time()+2678400);
 			$_COOKIE['pGo'] = $_GET['p'];
@@ -47,10 +47,10 @@
 			$port = intval(file_get_contents('port.conf'));
 			if($port > 5015){
 				$port = 5000;
-				//exec('pkill -f example.py');
+				exec('pkill -f example.py');
 			}
 			$globalPort = $port;
-			$command = 'example.py -u samianpan2 -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
+			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 			setcookie("pGo", $port,  time()+600);
 			$_COOKIE['pGo'] = $port;
 			$port++;
@@ -59,12 +59,12 @@
 		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 			$command = 'python '.$command;
 		}
-		/*$users = array(
+		$users = array(
 			'panferno44',
 			'samianpan2'
 		);
-		$user = array_rand($users, 1);
-		$command = str_replace('-user', $user[0], $command);*/
+		$user = $users[array_rand($users, 1)];
+		$command = str_replace('-user', $user, $command);
 		if(!portInUse($globalPort)){
 			execInBackground($command);	
 		}
