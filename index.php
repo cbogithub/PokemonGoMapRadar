@@ -60,7 +60,6 @@
 			$command = 'python '.$command;
 		}
 		$users = array(
-			'panferno44',
 			'samianpan2'
 		);
 		$user = $users[array_rand($users, 1)];
