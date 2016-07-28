@@ -49,6 +49,9 @@
 				$port = 5000;
 				//exec('pkill -f example.py');
 			}
+			if($port < 5000){
+				$port = 5000;
+			}
 			$globalPort = $port;
 			$command = 'example.py -u -user -p hola45 -l "durango" -H '.$host.' -P '.$port.' -st '.$steps;
 			setcookie("pGo", $port,  time()+600);
