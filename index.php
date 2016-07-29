@@ -63,8 +63,10 @@
 			$command = 'python '.$command;
 		}
 		$users = array(
-			//'panferno44',
-			'samianpan2'
+			'panferno44',
+			'panferno4069826',
+			'samianpan2',
+			'samianpan3'
 		);
 		$user = $users[array_rand($users, 1)];
 		$command = str_replace('-user', $user, $command);
