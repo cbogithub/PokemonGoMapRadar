@@ -47,7 +47,7 @@
 			$port = intval(file_get_contents('port.conf'));
 			if($port > 5015){
 				$port = 5000;
-				//exec('pkill -f example.py');
+				exec('pkill -f example.py');
 			}
 			if($port < 5000){
 				$port = 5000;
