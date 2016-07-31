@@ -1,0 +1,66 @@
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang=""><head>
+        <title>Pokedex Go</title> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link crossorigin="anonymous" integrity="sha384-2mX2PSpkRSXLQzmNzH3gwK6srb06+OfbDlYjbog8LQuALYJjuQ3+Yzy2JIWNV9rW" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/paper/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">        
+		<script type="text/javascript" src="js/1.libraries.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="js/pokemons.js"></script>
+        <script src="js/maxCP.js"></script>
+		<script src="js/multipliers.js"></script>
+    	<script src="kendo/js/jquery.min.js"></script>
+    </head>
+    <body>
+    <div class="container" id="no-more-tables">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div>
+        <div id="lights">
+          <figure class="big"><span></span></figure>
+          <figure class="red"><span></span></figure>
+          <figure class="yellow"><span></span></figure>
+          <figure class=" green"><span></span></figure>
+        </div>
+		  <form data-bind="submit: calculateResult"><div class="form-group">
+        <div id="screen"><div id="img"><img></div></div>
+        <div class="info" data-bind="with: evolutionResult" style="font-size: 1.1em;">
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Evolution</th>
+                  <th>Combat Power</th>
+                  <th>Candies</th>
+                  <th>Max CP</th>
+                  </tr>
+                </thead>
+                <tbody data-bind="foreach: { data: $data, as: 'evolution' }">
+                  <tr>
+                    <td data-title="Pokemon" data-bind="text: evolution.name"></td>
+                    <td data-title="Combat Power" data-bind="text: evolution.cp"></td>
+                    <td data-title="Requirements" data-bind="html: evolution.requirements"></td>
+                    <td data-title="Max Combat Power" data-bind="text: evolution.mcp"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <div data-bind="if: eeveelutionResult().length > 0" style="font-size: 1.1em; margin-top: 10px;"></div>
+        <div id="screen-controls">
+          <select class="form-control" data-bind="options: evolutionPokemons, optionsCaption: 'Select a Pokemon', optionsText: function(p){ return p.Name + ' - ' + p.Number }, value: selectedPokemon"></select>
+          <div id="cp-controls">
+            <span class="rem">-</span>
+            <span class="add">+</span>
+          </div>
+          <input class="form-control" data-bind="value: combatPower" id="cp">
+          <label>CP</label>
+        </div>
+				<input type="button" class="btn btn-lg btn-success" value="Evolve" data-bind="click: calculateResult" style="display:none;">
+		  </form>
+        </div>
+      </div>
+    </div>
+   	<a id="back-to-map" href="index.html"><i class="fa fa-location-arrow" aria-hidden="true"></i></a>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/pokedex.js"></script>
+</body></html>

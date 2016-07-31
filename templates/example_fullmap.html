@@ -6,28 +6,28 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
-    <title>Pokemon Go Map - por Saulo 7u7</title> 
+    <title>Pokemap Go</title> 
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDI82ba0jDSnqFoKPcW12GvCoAjc7M69MQ"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
 </head>
 <body>
+    <div data-role="view" data-title="Map" data-layout="main" data-model="app.home" data-show="app.home.onShow" data-after-show="app.home.afterShow">
     <div id="fullmap"></div>
     <div id="edit-button"></div>
     <div id="edit-button" class="gps"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+    <a id="pokedex-btn" href="pokedex.html"> <i class="fa fa-calculator" aria-hidden="true"></i> </a>
     <section id="form"><form id="data"> <input type="hidden" name="location" value="24.022369, -104.660774"><button id="submit" type="submit">Submit</button> </form></section>
-    <div id="message" class="error server"><h1>SERVER DOWN</h1></div>
-    <div id="message" class="error no-pokemons"><h1>NO POKEMONS FOUND</h1></div>
+    <div id="message" class="error server"><h1><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> CONNECTING</h1></div>
+    <div id="message" class="error no-pokemons"><h1>NO POKEMON FOUND</h1></div>
     <div id="message" class="search"><h1><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i> SEARCHING ...</h1></div>
-    <style type="text/css">
-    body{margin: 0;}#edit-button{display:none;background-color: #e11a22; color: white; position: fixed; bottom: 10px; left: 10px; border-radius: 50%; z-index: 400; height: 80px; width: 80px; font-size: 75px; text-align: center; FONT-FAMILY: roboto;padding-top: 8px; font-size: 50px; cursor: pointer; } #edit-button i{ position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);}#form{position: fixed !important; top: 50%; left: 50%; z-index: 300; width: 90%; max-width: 500px; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); background-color: white; padding: 2%; display: none; } #mapCanvas {width: 100%; height: 300px; } #infoPanel {float: left; margin-left: 10px; } #infoPanel div {margin-bottom: 5px; } #message{z-index: 400;position: absolute;width: 90%;max-width: 600px;margin: 20px auto 0;text-align: center;background: #00b9a9;color: white;top: 10px;font-family: roboto;border-radius: 50px;left: 0;right: 0;display: none;} #message h1{margin: 0; } #message.error{background: #d40000;}#message.search i{ font-size: 27px; } #fullmap{width:100%;position:relative;z-index:200;position: fixed !important;height: 100%;background-color: #3c3c3c !important;background-image: url("static/pokeball.png");background-size: 50%;background-repeat: no-repeat;background-position: 50%;overflow: visible !important;}.km-header{ display: none; }.infobox, .infobox *{background: transparent;color: white;border: none !important;margin: 0;display: table !important;width: auto !important;height: auto !important;}.infobox .gm-style-iw{margin-top: 90px;background: rgba(60, 60, 60, 0.54);margin-left: 12px;}.label-countdown{padding: 5px 10px;}.infobox b{display:none !important;}
-    }
-    </style>
+    <style type="text/css">body{margin: 0;}#edit-button, #pokedex-btn{display:none;background-color: #e11a22; color: white; position: fixed; bottom: 10px; left: 10px; border-radius: 50%; z-index: 400; height: 80px; width: 80px; font-size: 75px; text-align: center; FONT-FAMILY: roboto;padding-top: 8px; font-size: 50px; cursor: pointer; } #pokedex-btn{ left: auto; right: 10px; display: block !important;} #edit-button i, #pokedex-btn i{ position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);}#form{position: fixed !important; top: 50%; left: 50%; z-index: 300; width: 90%; max-width: 500px; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); background-color: white; padding: 2%; display: none; } #mapCanvas {width: 100%; height: 300px; } #infoPanel {float: left; margin-left: 10px; } #infoPanel div {margin-bottom: 5px; } #message{z-index: 400;position: absolute;width: 90%;max-width: 600px;margin: 20px auto 0;text-align: center;background: #00b9a9;color: white;top: 10px;font-family: roboto;border-radius: 50px;left: 0;right: 0;display: none;} #message h1{margin: 0; } #message.error{background: #d40000;}#message i{ font-size: 27px; } #fullmap{width:100%;position:relative;z-index:200;position: fixed !important;height: 100%;background-color: #3c3c3c !important;background-image: url("static/pokeball.png");background-size: 50%;background-repeat: no-repeat;background-position: 50%;overflow: visible !important;}.km-header{ display: none; }.infobox, .infobox *{background: transparent;color: white;border: none !important;margin: 0;display: table !important;width: auto !important;height: auto !important;}.infobox .gm-style-iw{margin-top: 90px;background: rgba(60, 60, 60, 0.54);margin-left: 12px;}.label-countdown{padding: 5px 10px;}.infobox b{display:none !important;}</style>
+</div>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- POkemon go map plus -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:320px;height:100px"
+     style="width:320px;height:100px;z-index: 300;position: relative;margin: auto;display: table;"
      data-ad-client="ca-pub-7877991039278762"
      data-ad-slot="6526069553"></ins>
 <script>

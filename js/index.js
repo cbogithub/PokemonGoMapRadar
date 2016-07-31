@@ -348,6 +348,6 @@ $(document).on("click", '#edit-button.gps', function() {
         });   
     }
 });
+// END_CUSTOM_CODE_home
 $('.km-scroll-container, #fullmap').height($(window).height());
 resetSession();
-// END_CUSTOM_CODE_home

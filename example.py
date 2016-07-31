@@ -724,7 +724,7 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
             (poke.Latitude, poke.Longitude) = \
                 transform_from_wgs_to_gcj(Location(poke.Latitude,
                     poke.Longitude))
-
+        
         pokemons[poke.SpawnPointId] = {
             "lat": poke.Latitude,
             "lng": poke.Longitude,
