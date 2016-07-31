@@ -175,3 +175,7 @@ input.form-control{
     margin: auto;
     margin-top: 20px;
 }
+#back-to-map{
+    background-color: #28aafd; color: white; position: fixed; top: 10px; right: 10px; border-radius: 50%; z-index: 400; height: 80px; width: 80px; font-size: 75px; text-align: center; FONT-FAMILY: roboto;padding-top: 8px; font-size: 50px; cursor: pointer;
+}
+#back-to-map i{ position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);}
